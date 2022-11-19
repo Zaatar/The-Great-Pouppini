@@ -4997,7 +4997,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 268886125}
-  m_LocalRotation: {x: 0.013500977, y: 3.295258e-10, z: -4.449326e-12, w: 0.99990886}
+  m_LocalRotation: {x: 0.013500979, y: -9.312378e-10, z: 1.2573768e-11, w: 0.99990886}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -24135,7 +24135,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191089896}
-  m_LocalRotation: {x: 0.03163856, y: 0.000000002149721, z: -6.8048144e-11, w: 0.9994994}
+  m_LocalRotation: {x: 0.03163856, y: -0.000000002149721, z: 6.8048144e-11, w: 0.9994994}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -34872,7 +34872,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691859460}
-  m_LocalRotation: {x: 0.031638555, y: 0.000000004299442, z: -1.3609627e-10, w: 0.9994994}
+  m_LocalRotation: {x: 0.031638555, y: -0.000000004299442, z: 1.3609627e-10, w: 0.9994994}
   m_LocalPosition: {x: -2.6095734, y: 0.5648352, z: 11.548218}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36969,14 +36969,6 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 1691859464}
-    - target: {fileID: 7213973755162363009, guid: 50f293027c41d724c8520bd2ab69e7dd, type: 3}
-      propertyPath: groundMask.m_Bits
-      value: 8256
-      objectReference: {fileID: 0}
-    - target: {fileID: 7213973755162363009, guid: 50f293027c41d724c8520bd2ab69e7dd, type: 3}
-      propertyPath: distractionMask.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
     - target: {fileID: 7555992585703644326, guid: 50f293027c41d724c8520bd2ab69e7dd, type: 3}
       propertyPath: m_Name
       value: PlayerPrefab
@@ -37827,39 +37819,6 @@ Transform:
   m_Father: {fileID: 766588471}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!1 &1835794695 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7555992585703644326, guid: 50f293027c41d724c8520bd2ab69e7dd, type: 3}
-  m_PrefabInstance: {fileID: 1796600981}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1835794697 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7213973755162363009, guid: 50f293027c41d724c8520bd2ab69e7dd, type: 3}
-  m_PrefabInstance: {fileID: 1796600981}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1835794695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38c35475d4235d04bbc4dfb725304d12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1835794699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1835794695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 511824fd24a61fe418b273b0883739d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distractionMask:
-    serializedVersion: 2
-    m_Bits: 128
-  movementScript: {fileID: 1835794697}
-  distractionMultiplier: 2
 --- !u!1001 &1836906212
 PrefabInstance:
   m_ObjectHideFlags: 0
