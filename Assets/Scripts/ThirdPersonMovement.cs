@@ -20,7 +20,17 @@ public class ThirdPersonMovement : MonoBehaviour
     public float sprintSpeedMultiplier = 3f;
     public float sprintJumpMultiplier = 1.5f;
     private Vector3 velocity;
-    // Update is called once per frame
+
+    private float originalSpeed;
+
+    private float originalJumpHeight;
+    
+    void Start()
+    {
+        originalSpeed = speed;
+        originalJumpHeight = jumpHeight;
+    }
+    
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -37,8 +47,8 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         else if (Input.GetButtonUp("Fire3"))
         {
-            speed /= sprintSpeedMultiplier;
-            jumpHeight /= sprintJumpMultiplier;
+            speed = originalSpeed;
+            jumpHeight = originalJumpHeight;
         }
 
         float horizontal = Input.GetAxisRaw("Horizontal");
