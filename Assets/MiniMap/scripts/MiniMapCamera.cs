@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class camera_follow : MonoBehaviour
+public class MiniMapCamera: MonoBehaviour
 
 
 {
@@ -22,5 +22,6 @@ public class camera_follow : MonoBehaviour
     void Update()
     {
         transform.position = player.transform.position + new Vector3(0, camera_height, 0);
+        //transform.rotation = Quaternion.Euler(90.0f, 0.0f, player.transform.rotation.z * -1.0f);
     }
 }
