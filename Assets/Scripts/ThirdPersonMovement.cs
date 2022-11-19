@@ -10,15 +10,16 @@ public class ThirdPersonMovement : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundMask;
     public float groundDistance = 0.4f;
-
     public float speed = 6f;
-
+    public float acceleration = 1f;
     public float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
     
     public float gravity = -9.81f;
     public bool isGrounded = false;
     public float jumpHeight = 3f;
+    public float sprintSpeedMultiplier = 3f;
+    public float sprintJumpMultiplier = 1.5f;
     private Vector3 velocity;
     // Update is called once per frame
     void Update()
@@ -29,6 +30,18 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             velocity.y = -2f;
         }
+
+        if (Input.GetButtonDown("Fire3"))
+        {
+            speed *= sprintSpeedMultiplier;
+            jumpHeight *= sprintJumpMultiplier;
+        }
+        else if (Input.GetButtonUp("Fire3"))
+        {
+            speed /= sprintSpeedMultiplier;
+            jumpHeight /= sprintJumpMultiplier;
+        }
+
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
