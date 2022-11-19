@@ -7,6 +7,15 @@ public class DistractionTrigger : MonoBehaviour
     public LayerMask distractionMask;
     [SerializeField] private ThirdPersonMovement movementScript;
     [SerializeField] private int distractionMultiplier = 2;
+    private float originalSpeed;
+    private float originalJumpHeight;
+
+    void Start()
+    {
+        originalSpeed = movementScript.speed;
+        originalJumpHeight = movementScript.jumpHeight;
+    }
+    
     void OnTriggerEnter(Collider objectCollidedWith)
     {
         handleTrigger(objectCollidedWith, true);
@@ -29,8 +38,8 @@ public class DistractionTrigger : MonoBehaviour
             }
             else
             {
-                movementScript.speed *= distractionMultiplier;
-                movementScript.jumpHeight *= distractionMultiplier;
+                movementScript.speed = originalSpeed;
+                movementScript.jumpHeight = originalJumpHeight;
             }
         }
     }
