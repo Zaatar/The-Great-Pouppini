@@ -8,7 +8,6 @@ public class MiniMapCamera: MonoBehaviour
 {
 
     public Transform player;
-    public int camera_height;
 
 
     // Start is called before the first frame update
@@ -21,7 +20,6 @@ public class MiniMapCamera: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = player.transform.position + new Vector3(0, camera_height, 0);
-        //transform.rotation = Quaternion.Euler(90.0f, 0.0f, player.transform.rotation.z * -1.0f);
+        transform.position = player.transform.position + new Vector3(0, 1, 0);
     }
 }
