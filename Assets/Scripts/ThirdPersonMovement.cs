@@ -11,7 +11,6 @@ public class ThirdPersonMovement : MonoBehaviour
     public LayerMask groundMask;
     public float groundDistance = 0.4f;
     public float speed = 6f;
-    public float acceleration = 1f;
     public float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
     
