@@ -6,10 +6,9 @@ public class Waypoint : MonoBehaviour
 {
     public Waypoint m_previousWaypoint = null;
     public Waypoint m_nextWaypoint = null;
-
-    [SerializeField]
+    
     [Range(0.0f, 5.0f)]
-    private float m_width = 1.0f;
+    public float m_width = 1.0f;
     //helpers
     private Transform m_cacheTransform = null;
     private void Start()
