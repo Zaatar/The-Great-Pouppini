@@ -40,6 +40,7 @@ public class Pickup : MonoBehaviour
                             questGiverInProximity.quest.isActive = true;
                             playerState.setQuestsLimit(playerState.getQuestsLimit()-1);
                             questGiverInProximity.quest.pickupObject.setCanBePickedUp(true);
+                            FindObjectOfType<AudioManager>().Play("QuestAccepted");
                         }
                     }
                     else
@@ -69,6 +70,7 @@ public class Pickup : MonoBehaviour
                     playerState.setQuestsLimit(playerState.getQuestsLimit() + 1);
                     playerState.quests.RemoveAt(playerState.quests.Count - 1);
                     Debug.LogWarning("Delivered Object");
+                    FindObjectOfType<AudioManager>().Play("QuestSuccess");
                 }
             }
         }
@@ -82,6 +84,7 @@ public class Pickup : MonoBehaviour
             playerState.addPickup(objectToBePickedUp);
             numberOfSlots--;
             Debug.LogWarning("Picked Up Object");
+            FindObjectOfType<AudioManager>().Play("PickupItem");
         }
     }
 
