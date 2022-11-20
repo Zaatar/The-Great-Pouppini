@@ -16,6 +16,7 @@ public class ThirdPersonMovement : MonoBehaviour
     
     public float gravity = -9.81f;
     public bool isGrounded = false;
+    public bool isJumping = false;
     public float jumpHeight = 3f;
     public float sprintSpeedMultiplier = 3f;
     public float sprintJumpMultiplier = 1.5f;
@@ -24,7 +25,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private float originalSpeed;
 
     private float originalJumpHeight;
-    
+    public Animator DogAnimator;
     void Start()
     {
         originalSpeed = speed;
@@ -37,26 +38,33 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (isGrounded && velocity.y < 0)
         {
+            DogAnimator.SetBool("IsStartedJumping", false);
             velocity.y = -2f;
-        }
-
-        if (Input.GetButtonDown("Fire3"))
-        {
-            speed *= sprintSpeedMultiplier;
-            jumpHeight *= sprintJumpMultiplier;
-        }
-        else if (Input.GetButtonUp("Fire3"))
-        {
-            speed = originalSpeed;
-            jumpHeight = originalJumpHeight;
         }
 
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
+        if (Input.GetButtonDown("Fire3"))
+        {
+            if (direction.magnitude > 0.1f)
+            {
+                DogAnimator.SetBool("IsRunning", true);
+            }
+            speed *= sprintSpeedMultiplier;
+            jumpHeight *= sprintJumpMultiplier;
+        }
+        else if (Input.GetButtonUp("Fire3"))
+        {
+            DogAnimator.SetBool("IsRunning", false);
+            speed = originalSpeed;
+            jumpHeight = originalJumpHeight;
+        }
+
         if (direction.magnitude >= 0.1f)
         {
+            DogAnimator.SetBool("IsWalking", true);
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, 
                 turnSmoothTime);
@@ -65,13 +73,30 @@ public class ThirdPersonMovement : MonoBehaviour
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDirection.normalized * (speed * Time.deltaTime));
         }
-
+        else
+        {
+            DogAnimator.SetBool("IsWalking", false);
+        }
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            DogAnimator.SetBool("IsStartedJumping", true);
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
-
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            Bark();
+        }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void Bark()
+    {
+        DogAnimator.SetBool("IsBarking", true);
+    }
+
+    public void StopBarking()
+    {
+        DogAnimator.SetBool("IsBarking", false);
     }
 }
