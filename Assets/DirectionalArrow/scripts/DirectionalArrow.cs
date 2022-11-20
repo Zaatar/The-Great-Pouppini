@@ -21,11 +21,12 @@ public class DirectionalArrow : MonoBehaviour
 
         if (playerState.quests.Count > 0)
         {
+            Quest currentQuest = quests[quests.Count - 1];
+
             if (quests[quests.Count - 1].pickupObject != null)
             {
                 arrow.GetComponent<MeshRenderer>().enabled = true;
-                Quest currentQuest = quests[quests.Count -1];
-
+                
                 if(currentQuest.pickupObject.getCanBePickedUp())
                 {
                     transform.LookAt(currentQuest.pickupObject.transform);
@@ -36,10 +37,12 @@ public class DirectionalArrow : MonoBehaviour
                     Debug.LogWarning("point to quest giver");
                     transform.LookAt(currentQuest.questGiver.transform);
                 }
-                if(currentQuest.questComplete)
-                {
-                    arrow.GetComponent<MeshRenderer>().enabled = false;
-                }
+                //if(currentQuest.questComplete)
+                //{
+                //    currentQuest = quests[quests.Count - 1];
+
+
+                //}
             }
         }
         else
