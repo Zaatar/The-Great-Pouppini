@@ -13,4 +13,5 @@ public class Quest
     public bool questComplete;
     public PickupObject pickupObject;
     public QuestGiver questGiver;
+    public float questCompletionTimeReward = 10.0f;
 }

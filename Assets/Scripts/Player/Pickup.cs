@@ -7,6 +7,7 @@ public class Pickup : MonoBehaviour
     [SerializeField] private int numberOfSlots = 3;
     [SerializeField] private PlayerState playerState;
     [SerializeField] private PickablesManager pickablesManager;
+    [SerializeField] private Timer timer;
     private bool currentlyInPickupObjectRange = false;
     private bool currentlyInDeliverObjectRange = false;
     private PickupObject objectToBePickedUp = null;
@@ -66,6 +67,7 @@ public class Pickup : MonoBehaviour
                   
                     questGiverInProximity.quest.questComplete = true;
                     playerState.updateScore(questGiverInProximity.quest.pointsReward);
+                    timer.timeRemaining += questGiverInProximity.quest.questCompletionTimeReward;
                     numberOfSlots++;
                     playerState.setQuestsLimit(playerState.getQuestsLimit() + 1);
                     playerState.quests.RemoveAt(playerState.quests.Count - 1);
