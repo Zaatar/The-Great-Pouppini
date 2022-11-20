@@ -10,6 +10,6 @@ public class MiniMapIcon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = target.transform.position;
+        transform.position = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
     }
 }
