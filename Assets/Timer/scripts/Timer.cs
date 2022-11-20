@@ -7,7 +7,7 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
 
-    public float timeRemaining = 10;
+    public float timeRemaining = 500;
     public bool timerIsRunning = false;
     public TMP_Text m_TextComponent;
 
@@ -31,6 +31,7 @@ public class Timer : MonoBehaviour
                 Debug.Log("Time has run out, Doggo has lost");
                 timeRemaining = 0;
                 timerIsRunning = false;
+                DisplayTime(timeRemaining);
             }
         }
     }
