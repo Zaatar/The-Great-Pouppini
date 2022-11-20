@@ -16,7 +16,7 @@ public class PickablesManager : MonoBehaviour
     public void GetHumansReference()
     {
         humansList = FindObjectsOfType<HumanCharacterController>();
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 6; i++)
         {
             SpawnQuest();
         }
@@ -61,5 +61,7 @@ public class PickablesManager : MonoBehaviour
         Destroy(pickable.gameObject, 2.0f);
         Destroy(questGiver, 2.0f);
         usedSpawnLocations.Remove(pickable.spawnPoint);
+
+        SpawnQuest();
     }
 }
