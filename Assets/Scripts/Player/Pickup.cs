@@ -19,14 +19,7 @@ public class Pickup : MonoBehaviour
             {
                 if (playerState != null && playerState.getQuests().Count != 0)
                 {
-                    // Set Can Be Picked Up value of Object
-                    foreach (Quest quest in playerState.getQuests())
-                    {
-                        if (quest.pickupObject == objectToBePickedUp)
-                        {
-                            objectToBePickedUp.setCanBePickedUp(true);
-                        }
-                    }
+
                     collectPickup();
                 }
             }
@@ -45,6 +38,7 @@ public class Pickup : MonoBehaviour
                             playerState.addQuest(questGiverInProximity.quest);
                             questGiverInProximity.quest.isActive = true;
                             playerState.setQuestsLimit(playerState.getQuestsLimit()-1);
+                            questGiverInProximity.quest.pickupObject.setCanBePickedUp(true);
                         }
                     }
                     else

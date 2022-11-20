@@ -6,4 +6,9 @@ public class QuestGiver : MonoBehaviour
 {
     public Quest quest= null;
     public PlayerState player;
+
+    void Start()
+    {
+        quest.questGiver = this;
+    }
 }
