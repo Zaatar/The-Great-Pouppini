@@ -4,24 +4,52 @@ using UnityEngine;
 
 public class DirectionalArrow : MonoBehaviour
 {
-    
+
     [SerializeField]
 
-    private Transform target;
-    public Transform arrow;
+    private GameObject player;
+    public GameObject arrow;
     public float speed;
     public float maxAmp;
     public float minAmp;
-    public Transform camera;
+
+
     private void Update()
     {
+        PlayerState playerState = player.GetComponent<PlayerState>();
+        List<Quest> quests = playerState.quests;
 
-        transform.LookAt(target);
-        //transform.position = new Vector3(transform.position.x, -camera.position.y, transform.position.z);
+        if (playerState.quests.Count > 0)
+        {
+            if (quests[quests.Count - 1].pickupObject != null)
+            {
+                arrow.GetComponent<MeshRenderer>().enabled = true;
+                Quest currentQuest = quests[quests.Count -1];
+
+                if(currentQuest.pickupObject.getCanBePickedUp())
+                {
+                    transform.LookAt(currentQuest.pickupObject.transform);
+
+                }
+                if(currentQuest.pickupObject.getHasBeenPickedUp())
+                {
+                    Debug.LogWarning("point to quest giver");
+                    transform.LookAt(currentQuest.questGiver.transform);
+                }
+                if(currentQuest.questComplete)
+                {
+                    arrow.GetComponent<MeshRenderer>().enabled = false;
+                }
+            }
+        }
+        else
+        {
+            arrow.GetComponent<MeshRenderer>().enabled = false;
+        }
 
         Vector3 vec = new Vector3(maxAmp + minAmp * Mathf.Sin(Time.time*speed), maxAmp + minAmp * Mathf.Sin(Time.time*speed) , maxAmp + minAmp * Mathf.Sin(Time.time*speed));
 
-        arrow.localScale = vec;
+        arrow.transform.localScale = vec;
 
     }
 }
