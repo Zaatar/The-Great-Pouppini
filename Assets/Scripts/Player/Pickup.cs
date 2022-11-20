@@ -67,6 +67,7 @@ public class Pickup : MonoBehaviour
                     playerState.updateScore(questGiverInProximity.quest.pointsReward);
                     numberOfSlots++;
                     playerState.setQuestsLimit(playerState.getQuestsLimit() + 1);
+                    playerState.quests.RemoveAt(playerState.quests.Count - 1);
                     Debug.LogWarning("Delivered Object");
                 }
             }
