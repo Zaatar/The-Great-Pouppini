@@ -8,6 +8,8 @@ public class Pickup : MonoBehaviour
     [SerializeField] private PlayerState playerState;
     [SerializeField] private PickablesManager pickablesManager;
     [SerializeField] private Timer timer;
+    [SerializeField] private GameObject HeartPrefab;
+    [SerializeField] private GameObject BrokenHeartPrefab;
     private bool currentlyInPickupObjectRange = false;
     private bool currentlyInDeliverObjectRange = false;
     private PickupObject objectToBePickedUp = null;
@@ -37,6 +39,19 @@ public class Pickup : MonoBehaviour
                     {
                         if (playerState.getQuestsLimit() > 0)
                         {
+                            GameObject heart = Instantiate(HeartPrefab);
+                            GameObject brokenHeart = Instantiate(BrokenHeartPrefab);
+
+                            heart.transform.position = transform.position + Vector3.up;
+                            brokenHeart.transform.position = questGiverInProximity.transform.position + Vector3.up * 2;
+
+                            Vector3 destinationDirection = transform.position - questGiverInProximity.transform.position;
+                            destinationDirection.y = 0;
+
+                            Quaternion targetRotation = Quaternion.LookRotation(destinationDirection);
+                            questGiverInProximity.transform.rotation = Quaternion.RotateTowards(
+                                questGiverInProximity.transform.rotation, targetRotation, 360);
+
                             playerState.addQuest(questGiverInProximity.quest);
                             questGiverInProximity.quest.isActive = true;
                             playerState.setQuestsLimit(playerState.getQuestsLimit()-1);
@@ -64,7 +79,20 @@ public class Pickup : MonoBehaviour
                     !heldObject.getHasBeenDelivered())
                 {
                     pickablesManager.DestroyPickable(heldObject);
-                  
+
+                    Vector3 destinationDirection = transform.position - questGiverInProximity.transform.position;
+                    destinationDirection.y = 0;
+
+                    Quaternion targetRotation = Quaternion.LookRotation(destinationDirection);
+                    questGiverInProximity.transform.rotation = Quaternion.RotateTowards(
+                        questGiverInProximity.transform.rotation, targetRotation, 360);
+
+                    GameObject heart = Instantiate(HeartPrefab);
+                    GameObject heartQuestGiver = Instantiate(HeartPrefab);
+
+                    heart.transform.position = transform.position + Vector3.up;
+                    heartQuestGiver.transform.position = questGiverInProximity.transform.position + Vector3.up;
+
                     questGiverInProximity.quest.questComplete = true;
                     playerState.updateScore(questGiverInProximity.quest.pointsReward);
                     timer.timeRemaining += questGiverInProximity.quest.questCompletionTimeReward;
