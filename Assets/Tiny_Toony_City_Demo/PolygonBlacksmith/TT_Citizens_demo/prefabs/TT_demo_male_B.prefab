@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 6214307300129733351}
   - component: {fileID: 9177827649643234717}
   - component: {fileID: 7466763791745697812}
+  - component: {fileID: -2816104928065442922}
   m_Layer: 0
   m_Name: TT_demo_male_B
   m_TagString: Untagged
@@ -358,6 +359,8 @@ MonoBehaviour:
   StopDistance: 2.5
   destination: {x: 0, y: 0, z: 0}
   reachedDestination: 0
+  isRunning: 0
+  shouldStop: 0
 --- !u!136 &7466763791745697812
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -372,6 +375,19 @@ CapsuleCollider:
   m_Height: 2.1547918
   m_Direction: 1
   m_Center: {x: 0, y: 0.5773959, z: 0}
+--- !u!135 &-2816104928065442922
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3457138954362509356}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3457138954362509728
 GameObject:
   m_ObjectHideFlags: 0
