@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class QuestGiver : MonoBehaviour
 {
-    public Quest quest;
-    public ThirdPersonMovement player;
+    public Quest quest= null;
+    public PlayerState player;
 }

@@ -9,4 +9,6 @@ public class Quest
     public string title;
     public string description;
     public int pointsReward;
+    public bool questComplete;
+    public PickupObject pickupObject;
 }

@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class PickupObject : MonoBehaviour
 {
+    private bool canBePickedUp = false;
     private bool hasBeenPickedUp = false;
 
     private bool hasBeenDelivered = false;
     [SerializeField] private QuestGiver correspondingQuestGiver;
 
+    public bool getCanBePickedUp()
+    {
+        return canBePickedUp;
+    }
+
+    public void setCanBePickedUp(bool pCanBePickedUp)
+    {
+        canBePickedUp = pCanBePickedUp;
+    }
     public bool getHasBeenPickedUp()
     {
         return hasBeenPickedUp;
@@ -39,11 +49,6 @@ public class PickupObject : MonoBehaviour
         {
             gameObject.SetActive(false);
             Debug.LogWarning("Picked up, deactivating!");
-            if (hasBeenDelivered)
-            {
-                Debug.LogWarning("Pickup delivered to corresponding actor, destroying pickup");
-                Destroy(gameObject);
-            }
         }
     }
 }

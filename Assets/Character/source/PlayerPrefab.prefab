@@ -542,7 +542,6 @@ GameObject:
   - component: {fileID: 7213973755162363009}
   - component: {fileID: 4253036819875793031}
   - component: {fileID: 1835794702}
-  - component: {fileID: 5347839704996473837}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -629,19 +628,6 @@ MonoBehaviour:
   movementScript: {fileID: 7213973755162363009}
   distractionMultiplier: 2
 --- !u!114 &1835794702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7555992585703644326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c717aec6d0e0d440b19dfff6461a382, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberOfSlots: 3
---- !u!114 &5347839704996473837
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
