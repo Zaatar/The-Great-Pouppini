@@ -6,6 +6,7 @@ public class Pickup : MonoBehaviour
 {
     [SerializeField] private int numberOfSlots = 3;
     [SerializeField] private PlayerState playerState;
+    [SerializeField] private PickablesManager pickablesManager;
     private bool currentlyInPickupObjectRange = false;
     private bool currentlyInDeliverObjectRange = false;
     private PickupObject objectToBePickedUp = null;
@@ -60,12 +61,12 @@ public class Pickup : MonoBehaviour
                 if (heldObject.getCorrespondingQuestGiver() == questGiverInProximity &&
                     !heldObject.getHasBeenDelivered())
                 {
-                    heldObject.setHasBeenDelivered(true);
+                    pickablesManager.DestroyPickable(heldObject);
+                  
                     questGiverInProximity.quest.questComplete = true;
                     playerState.updateScore(questGiverInProximity.quest.pointsReward);
                     numberOfSlots++;
                     playerState.setQuestsLimit(playerState.getQuestsLimit() + 1);
-                    Destroy(heldObject.gameObject, 2.0f);
                     Debug.LogWarning("Delivered Object");
                 }
             }

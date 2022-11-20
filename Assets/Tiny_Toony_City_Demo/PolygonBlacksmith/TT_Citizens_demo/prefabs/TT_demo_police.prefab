@@ -897,6 +897,7 @@ GameObject:
   - component: {fileID: 3099270081781189365}
   - component: {fileID: -7428792090765082908}
   - component: {fileID: -7984918191869977723}
+  - component: {fileID: 1740612269471116818}
   m_Layer: 0
   m_Name: TT_demo_police
   m_TagString: Untagged
@@ -972,6 +973,8 @@ MonoBehaviour:
   StopDistance: 2.5
   destination: {x: 0, y: 0, z: 0}
   reachedDestination: 0
+  isRunning: 0
+  shouldStop: 0
 --- !u!136 &-7984918191869977723
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -986,6 +989,19 @@ CapsuleCollider:
   m_Height: 2.1547918
   m_Direction: 1
   m_Center: {x: 0, y: 0.5773959, z: 0}
+--- !u!135 &1740612269471116818
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2251931901196540178}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2251931901196540182
 GameObject:
   m_ObjectHideFlags: 0

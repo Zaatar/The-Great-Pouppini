@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PickupObject : MonoBehaviour
 {
+    public Transform spawnPoint = null;
     private bool canBePickedUp = false;
     private bool hasBeenPickedUp = false;
 
     private bool hasBeenDelivered = false;
-    [SerializeField] private QuestGiver correspondingQuestGiver;
+    public QuestGiver correspondingQuestGiver;
 
     public bool getCanBePickedUp()
     {

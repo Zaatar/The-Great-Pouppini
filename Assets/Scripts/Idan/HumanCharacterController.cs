@@ -10,10 +10,11 @@ public class HumanCharacterController : MonoBehaviour
     //helpers
     public Vector3 destination;
     public bool reachedDestination = false;
-
+    public bool isRunning = false;
+    public bool shouldStop = false;
     private void Update()
     {
-        if(transform.position != destination)
+        if(transform.position != destination && !shouldStop)
         {
             Vector3 destinationDirection = destination - transform.position;
             destinationDirection.y = 0;
@@ -32,6 +33,18 @@ public class HumanCharacterController : MonoBehaviour
                 reachedDestination = true;
             }
         }
+    }
+
+    public void Stop()
+    {
+        shouldStop = true;
+        GetComponent<Animator>().SetBool((isRunning) ? "IsRunning" : "IsWalking", false);
+    }
+
+    public void KeepGoing()
+    {
+        shouldStop = false;
+        GetComponent<Animator>().SetBool((isRunning) ? "IsRunning" : "IsWalking", true);
     }
     public void SetDestination(Vector3 destination)
     {
