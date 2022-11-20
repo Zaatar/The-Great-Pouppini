@@ -13,7 +13,7 @@ public class Waypoint : MonoBehaviour
     private Transform m_cacheTransform = null;
     private void Start()
     {
-        
+        m_cacheTransform = transform;
     }
     /// <summary>
     /// Gives a random location along the waypoint width range.
