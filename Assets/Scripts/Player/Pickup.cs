@@ -5,23 +5,17 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     [SerializeField] private int numberOfSlots = 3;
-    private int originalNumberOfSlots;
     private bool currentlyInPickupObjectRange = false;
     private bool currentlyInDeliverObjectRange = false;
     private PickupObject objectToBePickedUp = null;
     private QuestGiver questGiverInProximity = null;
     private List<PickupObject> pickups = new List<PickupObject>();
 
-    void Start()
-    {
-        originalNumberOfSlots = numberOfSlots;
-    }
-
     void Update()
     {
         if (currentlyInPickupObjectRange && Input.GetKeyDown(KeyCode.E))
         {
-            if (objectToBePickedUp != null && numberOfSlots != 0)
+            if (objectToBePickedUp != null && numberOfSlots != 0 && !objectToBePickedUp.getHasBeenPickedUp())
             {
                 objectToBePickedUp.setHasBeenPickedUp(true);
                 pickups.Add(objectToBePickedUp);
@@ -35,7 +29,8 @@ public class Pickup : MonoBehaviour
             {
                 foreach (PickupObject heldObject in pickups)
                 {
-                    if (heldObject.getCorrespondingQuestGiver() == questGiverInProximity)
+                    if (heldObject.getCorrespondingQuestGiver() == questGiverInProximity && 
+                        !heldObject.getHasBeenDelivered())
                     {
                         heldObject.setHasBeenDelivered(true);
                         Debug.LogWarning("Delivered Object");
@@ -66,6 +61,13 @@ public class Pickup : MonoBehaviour
         if (objectCollidedWith.transform.gameObject.GetComponent<PickupObject>() != null)
         {
             currentlyInPickupObjectRange = false;
+            objectToBePickedUp = null;
+        }
+		
+        if (objectCollidedWith.transform.gameObject.GetComponent<QuestGiver>() != null)
+        {
+            currentlyInDeliverObjectRange = false;
+            questGiverInProximity = null;
         }
     }
 }
