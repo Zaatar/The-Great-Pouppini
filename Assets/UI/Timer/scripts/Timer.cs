@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
+    [SerializeField]
+    UnityEvent whenTimerEnds = null;
 
     public float timeRemaining = 500;
     public bool timerIsRunning = false;
     public TMP_Text m_TextComponent;
     public TMP_Text m_ScoreComponent;
+    public TMP_Text m_finalScoreComponent;
     [SerializeField] private PlayerState player;
 
     void Start()
@@ -29,14 +33,16 @@ public class Timer : MonoBehaviour
             }
             else
             {
-                Debug.Log("Time has run out, Doggo has lost");
-                timeRemaining = 0;
+                m_finalScoreComponent.text = player.getPoints().ToString();
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                whenTimerEnds.Invoke();
+                   timeRemaining = 0;
                 timerIsRunning = false;
             }
             DisplayTime(timeRemaining);
             if (player == null)
             {
-                Debug.LogWarning("Player state is not set in Timer.cs");
                 return;
             }
             DisplayScore(player.getPoints());

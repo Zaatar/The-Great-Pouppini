@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DistractionTrigger : MonoBehaviour
 {
-    public LayerMask distractionMask;
+    public string distractionMask;
     [SerializeField] private ThirdPersonMovement movementScript;
     [SerializeField] private int distractionMultiplier = 2;
     private float originalSpeed;
@@ -28,9 +28,9 @@ public class DistractionTrigger : MonoBehaviour
 
     void handleTrigger(Collider objectCollidedWith, bool isEntering)
     {
-        LayerMask objectCollidedWithLayerMask = (1 << objectCollidedWith.gameObject.layer);
-        if (distractionMask.value == objectCollidedWithLayerMask)
+        if (objectCollidedWith.CompareTag(distractionMask))
         {
+
             if (isEntering)
             {
                 movementScript.speed /= distractionMultiplier;
