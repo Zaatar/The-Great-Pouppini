@@ -8,7 +8,7 @@ public class Quest
     public bool isActive;
     public string title;
     public string description;
-    public int pointsReward;
+    public int pointsReward = 25;
     private float timeReward;
     public bool questComplete;
     public PickupObject pickupObject;
