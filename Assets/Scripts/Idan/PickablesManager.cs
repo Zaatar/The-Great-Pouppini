@@ -5,9 +5,10 @@ using UnityEngine;
 public class PickablesManager : MonoBehaviour
 {
     public GameObject pickablePrefab;
+    public GameObject humanMinimapIcon;
     public Transform[] pickableSpawnLocations;
     private List<Transform> usedSpawnLocations = new List<Transform>();
-    private HumanCharacterController[] humansList;
+    private HumanNavigator[] humansList;
 
     private void Start()
     {
@@ -15,7 +16,7 @@ public class PickablesManager : MonoBehaviour
     }
     public void GetHumansReference()
     {
-        humansList = FindObjectsOfType<HumanCharacterController>();
+        humansList = FindObjectsOfType<HumanNavigator>();
         for (int i = 0; i < 6; i++)
         {
             SpawnQuest();
@@ -36,18 +37,21 @@ public class PickablesManager : MonoBehaviour
 
         pickup.spawnPoint = spawnLocation;
 
-        HumanCharacterController humanQuestGiver;
+        HumanNavigator humanQuestGiver;
         do
         {
             humanQuestGiver = humansList[Random.Range(0, humansList.Length)];
         } while (humanQuestGiver.GetComponent<QuestGiver>() != null);
 
         humanQuestGiver.gameObject.AddComponent<QuestGiver>();
-
+        GameObject obj2 = Instantiate(humanMinimapIcon, humanQuestGiver.transform);
+        obj2.transform.position = obj2.transform.position - Vector3.up * 3;
         humanQuestGiver.GetComponent<QuestGiver>().quest = new Quest();
         humanQuestGiver.GetComponent<QuestGiver>().quest.pickupObject = pickup;
+        humanQuestGiver.GetComponent<QuestGiver>().minimapIcon = obj2;
+
         pickup.correspondingQuestGiver = humanQuestGiver.GetComponent<QuestGiver>();
-        humanQuestGiver.Stop();
+        humanQuestGiver.GetComponent<HumanCharacterController>().Stop();
     }
 
     public void DestroyPickable(PickupObject pickable)
@@ -57,7 +61,7 @@ public class PickablesManager : MonoBehaviour
         HumanCharacterController controller = questGiver.GetComponent<HumanCharacterController>();
         
         controller.KeepGoing();
-
+        Destroy(questGiver.minimapIcon);
         Destroy(pickable.gameObject, 2.0f);
         Destroy(questGiver, 2.0f);
         usedSpawnLocations.Remove(pickable.spawnPoint);

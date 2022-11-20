@@ -24,6 +24,6 @@ public class MiniMapIconPickable : MonoBehaviour
             this.GetComponent<SpriteRenderer>().GetComponent<Renderer>().enabled = false;
         }
 
-        transform.position = target.transform.position;
+        transform.position = target.transform.position - Vector3.up * 3;
     }
 }
