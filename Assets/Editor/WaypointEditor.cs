@@ -6,7 +6,8 @@ using UnityEditor;
 [InitializeOnLoad()]
 public class WaypointEditor
 {
-    [DrawGizmo(GizmoType.NotInSelectionHierarchy | GizmoType.Selected | GizmoType.Pickable)]
+   
+        [DrawGizmo(GizmoType.NotInSelectionHierarchy | GizmoType.Selected | GizmoType.Pickable)]
     public static void OnDrawSceneGizmo(Waypoint waypoint, GizmoType gizmoType)
     {
         if((gizmoType & GizmoType.Selected) != 0)
