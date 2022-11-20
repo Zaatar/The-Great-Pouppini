@@ -5,6 +5,8 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
+
+    public float SoundValue = 1.0f;
     // Start is called before the first frame update
     void Awake()
     {
@@ -18,6 +20,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void UpdateSoundVolue(float value)
+    {
+        SoundValue = value;
+
+        foreach (Sound s in sounds)
+        {
+            s.source.volume = s.volume * value;
+        }
+    }
     void Start()
     {
         Play("Theme");

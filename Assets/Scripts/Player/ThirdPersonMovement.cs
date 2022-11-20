@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
+    public AudioManager audioManager;
+
     public CharacterController controller;
     public Transform camera;
     public Transform groundCheck;
@@ -70,7 +72,7 @@ public class ThirdPersonMovement : MonoBehaviour
             if (isRunning)
                 DogAnimator.SetBool("IsRunning", true);
             DogAnimator.SetBool("IsWalking", true);
-            FindObjectOfType<AudioManager>().Play("DogSteps");
+            audioManager.Play("DogSteps");
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, 
                 turnSmoothTime);
@@ -84,7 +86,7 @@ public class ThirdPersonMovement : MonoBehaviour
             if(isRunning)
                 DogAnimator.SetBool("IsRunning", false);
             DogAnimator.SetBool("IsWalking", false);
-            FindObjectOfType<AudioManager>().Stop("DogSteps");
+            audioManager.Stop("DogSteps");
         }
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -102,7 +104,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public void Bark()
     {
         DogAnimator.SetBool("IsBarking", true);
-        FindObjectOfType<AudioManager>().Play("Bark");
+        audioManager.Play("Bark");
     }
 
     public void StopBarking()
