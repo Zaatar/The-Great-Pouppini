@@ -6,6 +6,7 @@ public class Pickup : MonoBehaviour
 {
     [SerializeField] private int numberOfSlots = 3;
     [SerializeField] private PlayerState playerState;
+    [SerializeField] private PickablesManager pickablesManager;
     private bool currentlyInPickupObjectRange = false;
     private bool currentlyInDeliverObjectRange = false;
     private PickupObject objectToBePickedUp = null;
@@ -19,14 +20,7 @@ public class Pickup : MonoBehaviour
             {
                 if (playerState != null && playerState.getQuests().Count != 0)
                 {
-                    // Set Can Be Picked Up value of Object
-                    foreach (Quest quest in playerState.getQuests())
-                    {
-                        if (quest.pickupObject == objectToBePickedUp)
-                        {
-                            objectToBePickedUp.setCanBePickedUp(true);
-                        }
-                    }
+
                     collectPickup();
                 }
             }
@@ -45,6 +39,7 @@ public class Pickup : MonoBehaviour
                             playerState.addQuest(questGiverInProximity.quest);
                             questGiverInProximity.quest.isActive = true;
                             playerState.setQuestsLimit(playerState.getQuestsLimit()-1);
+                            questGiverInProximity.quest.pickupObject.setCanBePickedUp(true);
                         }
                     }
                     else
@@ -66,12 +61,13 @@ public class Pickup : MonoBehaviour
                 if (heldObject.getCorrespondingQuestGiver() == questGiverInProximity &&
                     !heldObject.getHasBeenDelivered())
                 {
-                    heldObject.setHasBeenDelivered(true);
+                    pickablesManager.DestroyPickable(heldObject);
+                  
                     questGiverInProximity.quest.questComplete = true;
                     playerState.updateScore(questGiverInProximity.quest.pointsReward);
                     numberOfSlots++;
                     playerState.setQuestsLimit(playerState.getQuestsLimit() + 1);
-                    Destroy(heldObject.gameObject, 2.0f);
+                    playerState.quests.RemoveAt(playerState.quests.Count - 1);
                     Debug.LogWarning("Delivered Object");
                 }
             }

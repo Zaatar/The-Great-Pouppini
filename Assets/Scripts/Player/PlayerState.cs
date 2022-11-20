@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour
 {
-    private List<Quest> quests = new List<Quest>();
-    private List<PickupObject> pickups = new List<PickupObject>();
+    public List<Quest> quests = new List<Quest>();
+    public List<PickupObject> pickups = new List<PickupObject>();
     private int points;
+
+    [SerializeField] private Timer timer;
     [SerializeField] private int questsLimit = 99;
 
     public List<Quest> getQuests()
@@ -17,6 +19,7 @@ public class PlayerState : MonoBehaviour
     public void addQuest(Quest pQuest)
     {
         quests.Add(pQuest);
+        timer.timeRemaining += 5;
     }
 
     public List<PickupObject> getPickups()
