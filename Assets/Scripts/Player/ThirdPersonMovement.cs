@@ -17,6 +17,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public float gravity = -9.81f;
     public bool isGrounded = false;
     public bool isJumping = false;
+    public bool isRunning = false;
     public float jumpHeight = 3f;
     public float sprintSpeedMultiplier = 3f;
     public float sprintJumpMultiplier = 1.5f;
@@ -48,6 +49,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Fire3"))
         {
+            isRunning = true;
             if (direction.magnitude > 0.1f)
             {
                 DogAnimator.SetBool("IsRunning", true);
@@ -57,6 +59,7 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         else if (Input.GetButtonUp("Fire3"))
         {
+            isRunning = false;
             DogAnimator.SetBool("IsRunning", false);
             speed = originalSpeed;
             jumpHeight = originalJumpHeight;
@@ -64,6 +67,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (direction.magnitude >= 0.1f)
         {
+            if (isRunning)
+                DogAnimator.SetBool("IsRunning", true);
             DogAnimator.SetBool("IsWalking", true);
             FindObjectOfType<AudioManager>().Play("DogSteps");
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
@@ -76,6 +81,8 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         else
         {
+            if(isRunning)
+                DogAnimator.SetBool("IsRunning", false);
             DogAnimator.SetBool("IsWalking", false);
             FindObjectOfType<AudioManager>().Stop("DogSteps");
         }
